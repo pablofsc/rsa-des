@@ -11,11 +11,11 @@
 
 <body>
     <h1 class="text-center my-5">Demonstração do Algoritmo RSA</h1>
-    <div class="container">
+    <div class="container-xxl">
         <div class="row d-flex justify-content-center my-5">
-            <div class="col-4"></div>
+            <div class="col-1"></div>
 
-            <div class="col-1 d-flex flex-column justify-content-around">
+            <div class="col-4 col-xl-1 d-flex flex-column justify-content-around">
                 <div>
                     <select class="form-select form-select-sm" id="p" onchange="atualizar()">
                     </select>
@@ -27,20 +27,16 @@
                 </div>
             </div>
 
-            <div class="col-1 d-flex justify-content-center align-items-center">
+            <div class="col-2 col-xl-1 d-flex justify-content-center align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
                     <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
                 </svg>
             </div>
 
-            <div class="col-1">
+            <div class="col-5 col-xl-2">
                 <div id="valores">
                     <!-- -->
                 </div>
-            </div>
-
-            <div class="col-4" id="avisos">
-                <!-- -->
             </div>
         </div>
 
@@ -66,19 +62,19 @@
                         <small>&nbsp;PÚBLICA</small>
                     </div>
                     <span id="chave-publica">
-
+                        <!-- -->
                     </span>
                 </div>
             </div>
 
             <div class="col-4">
-                <textarea class="form-control" id="saida-cifrar" style="height: 150px" disabled></textarea>
+                <textarea class="form-control" id="saida-cifrar" style="height: 150px" disabled> <!-- --> </textarea>
             </div>
         </div>
 
         <div class="row d-flex justify-content-center my-5">
             <div class="col-4">
-                <textarea class="form-control" id="entrada-decifrar" style="height: 150px" oninput=""></textarea>
+                <textarea class="form-control" id="entrada-decifrar" style="height: 150px" oninput=""> <!-- --> </textarea>
             </div>
 
             <div class="col-2 d-flex flex-column justify-content-evenly align-items-center">
@@ -98,13 +94,19 @@
                         <small> &nbsp;PRIVADA</small>
                     </div>
                     <span id="chave-privada">
-
+                        <!-- -->
                     </span>
                 </div>
             </div>
 
             <div class="col-4">
-                <textarea class="form-control" id="saida-decifrar" style="height: 150px" disabled></textarea>
+                <textarea class="form-control" id="saida-decifrar" style="height: 150px" disabled> <!-- --> </textarea>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-8 col-md-6 col-xl-4" id="avisos">
+                <!-- -->
             </div>
         </div>
     </div>
