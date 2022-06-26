@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demonstração RSA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+
+<body>
+    <h1 class="text-center my-5">Demonstração do Algoritmo RSA</h1>
+    <div class="container">
+        <div class="row d-flex justify-content-center my-5">
+            <div class="col-4"></div>
+
+            <div class="col-1 d-flex flex-column justify-content-around">
+                <div>
+                    <select class="form-select form-select-sm" id="p" onchange="atualizar()">
+                    </select>
+                </div>
+
+                <div>
+                    <select class="form-select form-select-sm" id="q" onchange="atualizar()">
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-1 d-flex justify-content-center align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
+                    <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                </svg>
+            </div>
+
+            <div class="col-1">
+                <div id="valores">
+                    <!-- -->
+                </div>
+            </div>
+
+            <div class="col-4" id="avisos">
+                <!-- -->
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-center my-5">
+            <div class="col-4">
+                <textarea class="form-control" id="entrada-cifrar" style="height: 150px" oninput="atualizar()"></textarea>
+            </div>
+
+            <div class="col-2 d-flex flex-column justify-content-evenly align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                    <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+                </svg>
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                </svg>
+
+                <div class="d-flex flex-column align-items-center">
+                    <div class="d-flex flex-row align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
+                            <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                        </svg>
+                        <small>&nbsp;PÚBLICA</small>
+                    </div>
+                    <span id="chave-publica">
+
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <textarea class="form-control" id="saida-cifrar" style="height: 150px" disabled></textarea>
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-center my-5">
+            <div class="col-4">
+                <textarea class="form-control" id="entrada-decifrar" style="height: 150px" oninput=""></textarea>
+            </div>
+
+            <div class="col-2 d-flex flex-column justify-content-evenly align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                    <path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z" />
+                </svg>
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                </svg>
+
+                <div class="d-flex flex-column align-items-center">
+                    <div class="d-flex flex-row align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
+                            <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                        </svg>
+                        <small> &nbsp;PRIVADA</small>
+                    </div>
+                    <span id="chave-privada">
+
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <textarea class="form-control" id="saida-decifrar" style="height: 150px" disabled></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script src="./script_utils.js"></script>
+    <script src="./script_rsa.js"></script>
+</body>
+
+</html>;
