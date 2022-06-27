@@ -1,8 +1,10 @@
+// executa quando o documento estiver carregado
 $(document).ready(() => {
     inserirPrimos();
     atualizar();
 });
 
+// executa todo o algoritmo com as informações inseridas nos campos
 const atualizar = () => {
     const p = parseInt($('#p').val());
     const q = parseInt($('#q').val());
@@ -48,6 +50,7 @@ const atualizar = () => {
     $('#saida-decifrar').html(paraCaracteres(decifrado));
 };
 
+// gera primos até 1000 e os insere nos menus para que o usuário escolha dois deles
 const inserirPrimos = () => {
     for (let num = 3; num <= 1000; num++) {
         let primo = true;
@@ -69,6 +72,7 @@ const inserirPrimos = () => {
     $(`#q > *[value='23']`).attr('selected', '');
 };
 
+// calcula todas as constantes necessárias para o algoritmo RSA e retorna um objeto com estes valores
 const prepararRSA = (p, q) => {
     const n = (p, q) => p * q;
     const phi = (p, q) => (p - 1) * (q - 1);
@@ -96,6 +100,7 @@ const prepararRSA = (p, q) => {
     };
 };
 
+// cifra e mensagem e retorna o texto cifrado
 const cifrarRSA = (mensagem, e, n) => {
     let cifrado = [];
     for (let codigoCaractere of mensagem) {
@@ -106,6 +111,7 @@ const cifrarRSA = (mensagem, e, n) => {
     return cifrado;
 };
 
+// decifra a mensagem e retorna o texto decifrado
 const decifrarRSA = (cifrado, d, n) => {
     let decifrado = [];
     for (let codigoCaractere of cifrado) {
